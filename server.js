@@ -16,6 +16,8 @@ import { createPost } from "./controllers/posts.js";
 import { verifyToken } from "./middlewares/auth.js";
 // import User from "./models/user.js";
 // import Post from "./models/post.js";
+import Post from "./models/posts.js";
+import User from "./models/user.js";
 // import { users, posts } from "./data/server.js";
 
 
@@ -44,6 +46,21 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+// const AWS = require("aws-sdk");
+// const s3 = new AWS.S3()
+// // store something
+// await s3.putObject({
+//   Body: JSON.stringify({key:"value"}),
+//   Bucket: "cyclic-energetic-pink-slippers-us-east-2",
+//   Key: "some_files/my_file.json",
+// }).promise()
+
+// // get it back
+// let my_file = await s3.getObject({
+//   Bucket: "cyclic-energetic-pink-slippers-us-east-2",
+//   Key: "some_files/my_file.json",
+// }).promise()
+
 /* ROUTES WITH FILES */
 app.post("/auth/register", upload.single("picture"), register);
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
@@ -54,8 +71,8 @@ app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 
 /* MONGOOSE SETUP */
-const PORT = process.env.PORT || 5000;
-mongoose.connect(process.env.MONGO_URL, {
+const PORT = process.env.PORT || 5001;
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

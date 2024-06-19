@@ -12,6 +12,7 @@
   "author": "TonyLyon",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1601.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
